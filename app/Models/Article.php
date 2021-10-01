@@ -26,6 +26,10 @@ class Article extends Model
         'slug'
     ];
 
+    public $dates = [
+        'published_at'
+    ];
+
     /**
      * Может иметь много комментариев
      */
@@ -68,7 +72,8 @@ class Article extends Model
      */
     public function createdAtForHumans()
     {
-        return $this->created_at->diffForHumans();
+//        return $this->created_at->diffForHumans();
+        return $this->published_at->diffForHumans();
     }
 
     /**
