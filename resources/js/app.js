@@ -15,4 +15,13 @@ Vue.component('article-component', require('./components/ArticleComponent.vue').
 const app = new Vue({
     store,
     el: '#app',
+    created() {
+        let url = window.location.pathname;
+        let slug = url.substring(url.lastIndexOf('/')+1);
+
+        console.log(url);
+        console.log(slug);
+        this.$store.commit('SET_SLUG', slug);
+        this.$store.dispatch('getArticleData', slug);
+    }
 });
