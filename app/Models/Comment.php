@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function Symfony\Component\Translation\t;
 
 class Comment extends Model
 {
@@ -26,5 +27,10 @@ class Comment extends Model
     public function article()
     {
         return $this->belongsToMany(Article::class);
+    }
+
+    public function createdAtForHumans()
+    {
+        return $this->created_at->diffForHumans();
     }
 }

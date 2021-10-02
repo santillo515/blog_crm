@@ -80,6 +80,7 @@ class Article extends Model
      * @param $query
      * @return mixed
      * Возвращает запрос со всей логикой-дабы не нагружать Controller
+     * Также выводим наши посты
      */
     public function scopeLastLimit($query, $numbers)
     {
@@ -89,10 +90,29 @@ class Article extends Model
             ->get();
     }
 
+    /**
+     * @param $query
+     * @param $numbers
+     * @return mixed
+     * Выводим пагинацию на страницу
+     */
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->with('tags', 'state')
             ->orderBy('created_at', 'desc')
             ->paginate($numbers);
+    }
+
+    /**
+     * @param $query
+     * @param $slug
+     * @return mixed
+     * Поиск статей, ищем первую статью firstOrFail или выбрасываем ошибку
+     */
+    public function scopeFindBySlug($query, $slug)
+    {
+        return $query->with('comments', 'tags', 'state')
+            ->where('slug', $slug)
+            ->firstOrFail();
     }
 }
