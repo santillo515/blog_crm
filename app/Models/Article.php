@@ -115,4 +115,11 @@ class Article extends Model
             ->where('slug', $slug)
             ->firstOrFail();
     }
+
+    public function scopeFindByTag($query)
+    {
+        return $query->with('tags', 'state')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    }
 }
