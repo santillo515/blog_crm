@@ -1,5 +1,5 @@
 <?php
-/*
+
 
     namespace App\Services;
 
@@ -14,4 +14,4 @@
             return Article::findBySlug($slug);
         }
 
-    }*/
+    }
